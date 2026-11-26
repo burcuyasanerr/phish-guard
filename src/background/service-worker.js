@@ -6,9 +6,9 @@ const BADGE = {
   [RISK.DANGEROUS]: { text: "X", color: "#c62828" }
 };
 
-// Sekme başına son analiz sonucu (popup bunu okur).
+// Latest analysis result per tab (read by the popup).
 const results = new Map();
-// Sayfadan (content script) gelen ek sinyaller.
+// Extra signals reported by the page (content script).
 const pageSignals = new Map();
 
 async function getAllowlist() {
@@ -36,7 +36,7 @@ async function evaluateTab(tabId, url) {
   results.set(tabId, result);
   updateBadge(tabId, result);
 
-  // Kara listedeki siteler için uyarı sayfasına yönlendir.
+  // Redirect blocklisted sites to the warning page.
   if (result.blocked) {
     const warning = chrome.runtime.getURL(
       `src/warning/warning.html?url=${encodeURIComponent(url)}`

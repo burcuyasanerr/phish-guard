@@ -1,5 +1,5 @@
-// Yerel kara liste. İleride Google Safe Browsing, PhishTank, URLhaus gibi
-// dış kaynaklarla güncellenecek (bkz. README > Yol Haritası).
+// Local blocklist. It will later be updated from external sources such as
+// Google Safe Browsing, PhishTank and URLhaus (see README > Roadmap).
 
 let cache = null;
 
@@ -14,7 +14,7 @@ export async function loadBlocklist() {
 export async function isBlocked(hostname) {
   const list = await loadBlocklist();
   const host = hostname.toLowerCase();
-  // Alan adının kendisi veya herhangi bir üst alan adı listede mi?
+  // Is the domain itself or any of its parent domains on the list?
   const parts = host.split(".");
   for (let i = 0; i < parts.length - 1; i++) {
     if (list.has(parts.slice(i).join("."))) return true;

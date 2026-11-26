@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Kötü amaçlı ve tuzak siteleri tespit eden Chrome eki",
+  "description": "Chrome extension that detects malicious and phishing websites",
   "scripts": {
     "test": "node --test tests/"
   }

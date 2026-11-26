@@ -1,5 +1,5 @@
-// Sayfa içeriğinden risk sinyalleri toplar ve arka plana gönderir.
-// Not: content script'ler ES modülü olarak yüklenemediği için bağımsız yazıldı.
+// Collects risk signals from the page content and sends them to the background.
+// Note: content scripts cannot be loaded as ES modules, so this file is self-contained.
 
 (function () {
   const signals = [];
@@ -9,12 +9,12 @@
   if (passwordFields.length > 0 && !isHttps) {
     signals.push({
       id: "password-over-http",
-      description: "Şifresiz (HTTP) bir sayfada parola alanı var",
+      description: "Password field on an unencrypted (HTTP) page",
       weight: 30
     });
   }
 
-  // Formun başka bir alan adına veri göndermesi
+  // Form submitting data to a different domain
   for (const form of document.forms) {
     const action = form.getAttribute("action");
     if (!action) continue;
@@ -23,13 +23,13 @@
       if (target.hostname && target.hostname !== location.hostname && form.querySelector('input[type="password"]')) {
         signals.push({
           id: "cross-domain-form",
-          description: `Parola formu başka bir alan adına gönderiyor (${target.hostname})`,
+          description: `Password form submits to a different domain (${target.hostname})`,
           weight: 25
         });
         break;
       }
     } catch {
-      /* geçersiz action, yoksay */
+      /* invalid action, ignore */
     }
   }
 
@@ -48,8 +48,8 @@
     bar.id = "phish-guard-banner";
     bar.textContent =
       result.level === "dangerous"
-        ? "⚠️ Phish Guard: Bu site tehlikeli görünüyor. Kişisel bilgilerinizi girmeyin!"
-        : "⚠️ Phish Guard: Bu site şüpheli görünüyor. Dikkatli olun.";
+        ? "⚠️ Phish Guard: This site looks dangerous. Do not enter personal information!"
+        : "⚠️ Phish Guard: This site looks suspicious. Be careful.";
     Object.assign(bar.style, {
       position: "fixed", top: "0", left: "0", right: "0", zIndex: "2147483647",
       padding: "10px 16px", font: "600 14px system-ui, sans-serif", color: "#fff",

@@ -12,6 +12,6 @@ document.getElementById("proceed").onclick = async () => {
     await chrome.runtime.sendMessage({ type: "ALLOW_SITE", hostname });
     location.href = target;
   } catch {
-    /* geçersiz URL */
+    /* invalid URL */
   }
 };

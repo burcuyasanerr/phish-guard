@@ -1,5 +1,5 @@
 {
-  "_comment": "Örnek kayıtlar. Gerçek veriler ileride otomatik güncellenecek.",
+  "_comment": "Sample entries. Real data will be updated automatically later.",
   "domains": [
     "example-phishing.test",
     "malware.testing.google.test"

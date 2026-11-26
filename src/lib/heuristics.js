@@ -1,5 +1,5 @@
-// URL tabanlı sezgisel (heuristic) kontroller.
-// Her kural bir puan ekler; toplam puan risk seviyesini belirler.
+// URL-based heuristic checks.
+// Each matching rule adds points; the total score determines the risk level.
 
 const SUSPICIOUS_TLDS = ["zip", "mov", "xyz", "top", "click", "gq", "tk", "ml", "cf", "work", "rest"];
 const BRAND_KEYWORDS = ["paypal", "apple", "google", "microsoft", "netflix", "amazon", "facebook", "instagram", "garanti", "akbank", "ziraat", "isbank", "edevlet", "turkiye"];
@@ -8,49 +8,49 @@ const LURE_WORDS = ["login", "signin", "verify", "account", "update", "secure", 
 export const RULES = [
   {
     id: "ip-host",
-    description: "Alan adı yerine doğrudan IP adresi kullanılıyor",
+    description: "Uses a raw IP address instead of a domain name",
     weight: 30,
     test: (u) => /^\d{1,3}(\.\d{1,3}){3}$/.test(u.hostname)
   },
   {
     id: "punycode",
-    description: "Punycode (xn--) içeren, benzer görünümlü alan adı olabilir",
+    description: "Domain contains punycode (xn--) and may imitate another domain",
     weight: 25,
     test: (u) => u.hostname.split(".").some((p) => p.startsWith("xn--"))
   },
   {
     id: "at-symbol",
-    description: "URL içinde '@' karakteri var (gerçek hedef gizlenebilir)",
+    description: "URL contains an '@' character (the real destination may be hidden)",
     weight: 20,
     test: (u) => u.href.includes("@")
   },
   {
     id: "many-subdomains",
-    description: "Çok fazla alt alan adı var",
+    description: "Unusually many subdomains",
     weight: 15,
     test: (u) => u.hostname.split(".").length > 4
   },
   {
     id: "suspicious-tld",
-    description: "Kötüye kullanımı sık görülen bir üst düzey alan adı",
+    description: "Top-level domain commonly used for abuse",
     weight: 15,
     test: (u) => SUSPICIOUS_TLDS.includes(u.hostname.split(".").pop())
   },
   {
     id: "long-url",
-    description: "URL olağandışı uzun",
+    description: "URL is unusually long",
     weight: 10,
     test: (u) => u.href.length > 120
   },
   {
     id: "many-hyphens",
-    description: "Alan adında çok sayıda tire var",
+    description: "Domain name contains many hyphens",
     weight: 10,
     test: (u) => (u.hostname.match(/-/g) || []).length >= 3
   },
   {
     id: "brand-impersonation",
-    description: "Bilinen bir marka adı, markaya ait olmayan bir alan adında geçiyor",
+    description: "A well-known brand name appears in a domain the brand does not own",
     weight: 25,
     test: (u) => {
       const registrable = u.hostname.split(".").slice(-2).join(".");
@@ -59,13 +59,13 @@ export const RULES = [
   },
   {
     id: "lure-words",
-    description: "URL'de giriş/doğrulama gibi tuzak kelimeleri var",
+    description: "URL contains lure words such as login or verify",
     weight: 10,
     test: (u) => LURE_WORDS.some((w) => u.href.toLowerCase().includes(w))
   },
   {
     id: "no-https",
-    description: "Bağlantı şifreli değil (HTTPS yok)",
+    description: "Connection is not encrypted (no HTTPS)",
     weight: 10,
     test: (u) => u.protocol === "http:"
   }

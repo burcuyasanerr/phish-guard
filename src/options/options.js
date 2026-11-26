@@ -7,7 +7,7 @@ async function render() {
     const li = document.createElement("li");
     li.textContent = host;
     const btn = document.createElement("button");
-    btn.textContent = "Kaldır";
+    btn.textContent = "Remove";
     btn.onclick = async () => {
       await chrome.storage.sync.set({ allowlist: allowlist.filter((h) => h !== host) });
       render();

@@ -13,7 +13,7 @@ export const THRESHOLDS = {
 };
 
 /**
- * Bir URL'yi analiz eder ve risk sonucunu döndürür.
+ * Analyzes a URL and returns the risk result.
  * @returns {{url, hostname, level, score, reasons, blocked}}
  */
 export async function analyzeUrl(urlString, pageSignals = []) {
@@ -30,7 +30,7 @@ export async function analyzeUrl(urlString, pageSignals = []) {
   }
 
   if (blocked) {
-    reasons.unshift({ id: "blocklist", description: "Site bilinen kötü amaçlı siteler listesinde", weight: 100 });
+    reasons.unshift({ id: "blocklist", description: "Site is on the list of known malicious sites", weight: 100 });
     score = 100;
   }
 

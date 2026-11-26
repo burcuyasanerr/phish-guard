@@ -1,7 +1,7 @@
 const LABELS = {
-  safe: "✅ Güvenli görünüyor",
-  suspicious: "⚠️ Şüpheli",
-  dangerous: "⛔ Tehlikeli"
+  safe: "✅ Looks safe",
+  suspicious: "⚠️ Suspicious",
+  dangerous: "⛔ Dangerous"
 };
 
 async function init() {
@@ -10,14 +10,14 @@ async function init() {
   const status = document.getElementById("status");
 
   if (!result) {
-    status.textContent = "Bu sayfa analiz edilmedi.";
+    status.textContent = "This page has not been analyzed.";
     return;
   }
 
-  status.textContent = result.allowlisted ? "✅ İzin verilen site" : LABELS[result.level];
+  status.textContent = result.allowlisted ? "✅ Allowed site" : LABELS[result.level];
   status.className = `status ${result.level}`;
   document.getElementById("host").textContent = result.hostname;
-  document.getElementById("score").textContent = `Risk puanı: ${result.score}/100`;
+  document.getElementById("score").textContent = `Risk score: ${result.score}/100`;
 
   const list = document.getElementById("reasons");
   for (const r of result.reasons) {

@@ -1,29 +1,29 @@
-// Çalıştırma: node --test tests/
+// Run: node --test tests/
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { runHeuristics } from "../src/lib/heuristics.js";
 
-test("normal site düşük puan alır", () => {
+test("a normal site gets a low score", () => {
   const { score } = runHeuristics("https://www.wikipedia.org/");
-  assert.ok(score < 30, `puan ${score}`);
+  assert.ok(score < 30, `score ${score}`);
 });
 
-test("IP adresli http giriş sayfası en az şüpheli sayılır", () => {
+test("an HTTP login page on an IP address is at least suspicious", () => {
   const { score, matches } = runHeuristics("http://192.168.10.5/paypal/login/verify");
-  assert.ok(score >= 30, `puan ${score}`);
+  assert.ok(score >= 30, `score ${score}`);
   assert.ok(matches.some((m) => m.id === "ip-host"));
 });
 
-test("marka taklidi yakalanır", () => {
+test("brand impersonation is detected", () => {
   const { matches } = runHeuristics("https://paypal-secure-login.xyz/");
   assert.ok(matches.some((m) => m.id === "brand-impersonation"));
 });
 
-test("markanın kendi alan adı taklit sayılmaz", () => {
+test("the brand's own domain is not flagged as impersonation", () => {
   const { matches } = runHeuristics("https://www.paypal.com/signin");
   assert.ok(!matches.some((m) => m.id === "brand-impersonation"));
 });
 
-test("geçersiz URL hata fırlatmaz", () => {
-  assert.deepEqual(runHeuristics("bu bir url değil"), { score: 0, matches: [] });
+test("an invalid URL does not throw", () => {
+  assert.deepEqual(runHeuristics("this is not a url"), { score: 0, matches: [] });
 });
