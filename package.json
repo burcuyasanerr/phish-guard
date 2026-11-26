@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Chrome extension that detects malicious and phishing websites",
   "scripts": {
-    "test": "node --test tests/"
+    "test": "node --test tests/",
+    "serve:test": "python -m http.server 8000 --bind 127.0.0.1 --directory test-pages"
   }
 }

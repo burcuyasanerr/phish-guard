@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fake login (HTTP)</title>
+</head>
+<body>
+  <h1>Fake login page (test)</h1>
+  <p>A password field on an unencrypted page triggers the <code>password-over-http</code> signal.</p>
+  <form action="/login" method="post" onsubmit="return false">
+    <input type="text" placeholder="username" />
+    <input type="password" placeholder="password" />
+    <button type="submit">Sign in</button>
+  </form>
+  <p><a href="index.html">Back to the list</a></p>
+</body>
+</html>

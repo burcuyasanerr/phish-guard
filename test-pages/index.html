@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Phish Guard – Manual test pages</title>
+</head>
+<body>
+  <h1>Phish Guard – Manual test pages</h1>
+  <p>
+    Served locally with <code>npm run serve:test</code> at http://127.0.0.1:8000.
+    Every page here is harmless; it only imitates the signals the extension looks for.
+  </p>
+  <table border="1" cellpadding="6">
+    <thead>
+      <tr><th>Page</th><th>What it tests</th><th>Expected result</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="clean.html">clean.html</a></td>
+        <td>URL heuristics only (IP host + no HTTPS)</td>
+        <td>Suspicious, 40/100, no banner</td>
+      </tr>
+      <tr>
+        <td><a href="login-http.html">login-http.html</a></td>
+        <td>Password field on an HTTP page</td>
+        <td>Dangerous, 80/100, red banner (the word "login" in the URL also adds 10)</td>
+      </tr>
+      <tr>
+        <td><a href="cross-domain-form.html">cross-domain-form.html</a></td>
+        <td>Password form that submits to another domain</td>
+        <td>Dangerous, 95/100, red banner</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
