@@ -1,0 +1,7 @@
+{
+  "_comment": "Örnek kayıtlar. Gerçek veriler ileride otomatik güncellenecek.",
+  "domains": [
+    "example-phishing.test",
+    "malware.testing.google.test"
+  ]
+}

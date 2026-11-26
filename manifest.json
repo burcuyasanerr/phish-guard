@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Phish Guard",
+  "version": "0.1.0",
+  "description": "Kötü amaçlı ve tuzak (phishing) siteleri tespit edip kullanıcıyı uyaran tarayıcı eki.",
+  "permissions": ["tabs", "storage", "webNavigation"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "src/background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Phish Guard",
+    "default_popup": "src/popup/popup.html"
+  },
+  "options_page": "src/options/options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["src/warning/warning.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

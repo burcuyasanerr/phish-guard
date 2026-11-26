@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Phish Guard – Ayarlar</title>
+  <style>
+    body { font: 14px system-ui, sans-serif; max-width: 560px; margin: 32px auto; color: #222; }
+    li { display: flex; justify-content: space-between; padding: 4px 0; }
+    input { padding: 6px; width: 70%; }
+  </style>
+</head>
+<body>
+  <h1>Phish Guard – Ayarlar</h1>
+  <h2>İzin verilen siteler</h2>
+  <p>Bu listedeki siteler analiz edilmez ve uyarı gösterilmez.</p>
+  <form id="add-form">
+    <input id="host-input" placeholder="ornek.com" />
+    <button type="submit">Ekle</button>
+  </form>
+  <ul id="allowlist"></ul>
+  <script src="options.js"></script>
+</body>
+</html>

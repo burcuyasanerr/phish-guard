@@ -1,0 +1,10 @@
+{
+  "name": "phish-guard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Kötü amaçlı ve tuzak siteleri tespit eden Chrome eki",
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}

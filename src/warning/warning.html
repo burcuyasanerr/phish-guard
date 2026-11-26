@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Uyarı – Tehlikeli Site</title>
+  <style>
+    body { font: 16px system-ui, sans-serif; background: #b71c1c; color: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+    .box { max-width: 560px; text-align: center; padding: 24px; }
+    code { background: rgba(0,0,0,.25); padding: 2px 6px; border-radius: 4px; word-break: break-all; }
+    button { margin: 8px; padding: 10px 18px; font-size: 15px; border: none; border-radius: 6px; cursor: pointer; }
+    #back { background: #fff; color: #b71c1c; font-weight: 600; }
+    #proceed { background: transparent; color: #fff; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>⛔ Bu site tehlikeli olabilir</h1>
+    <p>Phish Guard, gitmek istediğiniz sitenin kötü amaçlı veya tuzak (phishing) bir site olduğunu tespit etti:</p>
+    <p><code id="url"></code></p>
+    <button id="back">Güvenli bölgeye dön</button>
+    <button id="proceed">Riski anlıyorum, yine de devam et</button>
+  </div>
+  <script src="warning.js"></script>
+</body>
+</html>
