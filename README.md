@@ -37,8 +37,11 @@ phish-guard/
 │   ├── popup/                 # Window that opens when the icon is clicked
 │   ├── options/               # Settings (allowed sites)
 │   └── warning/               # Dangerous-site warning page
-└── tests/
-    └── heuristics.test.js     # Unit tests using Node's built-in test runner
+├── tests/
+│   └── heuristics.test.js     # Unit tests using Node's built-in test runner
+├── test-pages/                # Harmless pages for manual testing (npm run serve:test)
+└── docs/
+    └── DEBUGGING.md           # Consoles, reload rule, service worker sleep test
 ```
 
 ## Installation (developer mode)
@@ -58,6 +61,12 @@ Requires Node.js 18+:
 ```bash
 npm test
 ```
+
+## Manual testing and debugging
+
+Harmless test pages live in `test-pages/`. Serve them with `npm run serve:test` (requires Python)
+and open http://127.0.0.1:8000. See [docs/DEBUGGING.md](docs/DEBUGGING.md) for where each part
+of the extension logs and how to run the service worker sleep test.
 
 ## Roadmap
 
